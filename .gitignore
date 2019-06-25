@@ -1,5 +1,6 @@
 # Never share your bot token with anyone else!
 config.json
+
 .vscode/
-.DS_STORES
+.DS_STORE
 cogs/__pycache__/*
