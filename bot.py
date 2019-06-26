@@ -14,7 +14,7 @@ setup = {
 bot = commands.Bot(**setup)
 
 # Loads the bot modules
-modules = ["cogs.nuclear"]
+modules = ["cogs.nuclear", "cogs.snap"]
 if __name__ == "__main__":
     for cog in modules:
         bot.load_extension(cog)
