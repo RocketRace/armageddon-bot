@@ -7,7 +7,8 @@ from json        import load
 config = load(open("config.json"))
 
 setup = {
-    "command_prefix":config.get("prefixes")
+    "command_prefix":config.get("prefixes"),
+    "help_command":None
 }
 
 bot = commands.Bot(**setup)
@@ -24,7 +25,6 @@ if __name__ == "__main__":
 def guild_and_admin(ctx):
     if not isinstance(ctx.channel, discord.abc.GuildChannel):
         return False
-        print("na")
     if not ctx.channel.permissions_for(ctx.author).administrator:
         return False
     return True
