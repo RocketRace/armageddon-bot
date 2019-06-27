@@ -19,16 +19,18 @@ class ZombieCog(commands.Cog):
                 raise commands.UserInputError()
             return True
 
-        warning_message = open("text/zombie.txt").read()
-        await ctx.send(warning_message)
+        warning_message = open("text/zombie.txt")
+        await ctx.send(warning_message.read())
+        warning_message.close()
         try:
             await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except asyncio.TimeoutError:
             await ctx.send("Aborting...")
         else:
             # Story
-            response_message = open("text/zombie2.txt").read()
-            await ctx.send(response_message)
+            response_message = open("text/zombie2.txt")
+            await ctx.send(response_message.read())
+            response_message.close()
 
             # Prepares roles for mass updates
             all_roles = ctx.guild.roles
@@ -64,15 +66,18 @@ class ZombieCog(commands.Cog):
                 # Edits existing ones
                 i = 0
                 for webhook in existing_webhooks:
-                    avatar = open(zombie_avatars[i % 4], "rb").read()
-                    webhook = await webhook.edit(name="Zombie", avatar=avatar)
+                    avatar = open(zombie_avatars[i % 4], "rb")
+                    webhook = await webhook.edit(name="Zombie", avatar=avatar.read(), reason="It's the end of the world!")
                     zombie_webhooks.append(webhook)
+                    avatar.close()
                     i += 1
                 # You can have up to 10 webhooks in a channel
                 for j in range(10 - webhook_count):
-                    avatar = open(zombie_avatars[i % 4], "rb").read()
-                    webhook = await channel.create_webhook(name="Zombie", avatar=avatar, reason="It's the end of the world!")
+                    avatar = open(zombie_avatars[i % 4], "rb")
+                    webhook = await channel.create_webhook(name="Zombie", avatar=avatar.read(), reason="It's the end of the world!")
                     zombie_webhooks.append(webhook)
+                    # always close your files
+                    avatar.close()
                     i += 1
 
                 # The channel is now "infected"

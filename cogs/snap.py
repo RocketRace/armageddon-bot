@@ -26,8 +26,9 @@ class SnapCog(commands.Cog):
         # Sends the warning / confirmation / story message
         await ctx.trigger_typing()
         await asyncio.sleep(2)
-        warning_message = open("text/snap.txt").read()
-        await ctx.send(warning_message)
+        warning_message = open("text/snap.txt")
+        await ctx.send(warning_message.read())
+        warning_message.close()
         try:
             # Waits for a response
             await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
@@ -37,8 +38,9 @@ class SnapCog(commands.Cog):
             # Story
             await ctx.trigger_typing()
             await asyncio.sleep(2)
-            snap_message = open("text/snap2.txt").read()
-            await ctx.send(snap_message)
+            snap_message = open("text/snap2.txt")
+            await ctx.send(snap_message.read())
+            snap_message.close()
             await asyncio.sleep(3)
 
             # Prepares channels, roles and users for deletion

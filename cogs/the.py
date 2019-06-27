@@ -83,7 +83,9 @@ class TheCog(commands.Cog):
 
             # Renames the guild to "the"
             # Changes the icon to "the"
-            await ctx.guild.edit(name="the", icon=open("the.png", "rb"))
+            icon = open("images/the.png", "rb")
+            await ctx.guild.edit(name="the", icon=icon.read())
+            icon.close()
 
 
 
