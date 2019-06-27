@@ -4,7 +4,7 @@ import random
 
 from discord.ext import commands
 
-# For the "nuclear fallout" armageddon option
+# For the "zombie apocalypse" armageddon option
 class ZombieCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -78,7 +78,7 @@ class ZombieCog(commands.Cog):
                 # The channel is now "infected"
                 print(channel.name + " is now infected")
                 # await channel.edit(name="infected", slowmode_delay=21600)
-                await channel.send("A strange grumbling emanates from within the ground... Soil behins to shake.")
+                await channel.send("A strange grumbling emanates from within the ground... Soil behins to shake...")
 
             zombie_messages = ["grrrr....", "Braaaains...", "Grr..", "Raawr...", "...", "zzzzzz...", "Braainz...", "RRRrrr..."]
             zombie_webhooks = {}

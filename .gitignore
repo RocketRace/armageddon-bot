@@ -3,5 +3,5 @@ config.json
 # Environment specific files
 .vscode/
 .DS_STORE
-# Automatically compiled bytecode of the cogss
+# Automatically compiled bytecode of the cogs
 cogs/__pycache__

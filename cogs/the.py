@@ -4,7 +4,7 @@ import random
 
 from discord.ext import commands
 
-# For the "nuclear fallout" armageddon option
+# For the "the" armageddon option
 class TheCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
