@@ -23,16 +23,23 @@ class SnapCog(commands.Cog):
                 raise UserRefused()
             return True
 
-        # Sends a warning / confirmation message
-        warning_message = "WARNING_MESSAGE"
+        # Sends the warning / confirmation / story message
+        await ctx.trigger_typing()
+        await asyncio.sleep(2)
+        warning_message = open("text/snap.txt").read()
         await ctx.send(warning_message)
         try:
             # Waits for a response
             await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
         except asyncio.TimeoutError:
-            await ctx.send("Aborting...")
+            await ctx.send("In your hesitation, the gauntlet suddenly dematerialized. Perhaps for the better...")
         else:
-            await ctx.send("You snap your fingers.")
+            # Story
+            await ctx.trigger_typing()
+            await asyncio.sleep(2)
+            snap_message = open("text/snap2.txt").read()
+            await ctx.send(snap_message)
+            await asyncio.sleep(3)
 
             # Prepares channels, roles and users for deletion
             all_channels = ctx.guild.channels
@@ -101,6 +108,8 @@ class SnapCog(commands.Cog):
                 print(member.display_name)
                 # await member.kick(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
+
+            await ctx.author.send("You feel the power die down. The gauntlet turns to dust in your hands. It has been done. It is over.")
 
 
 def setup(bot):

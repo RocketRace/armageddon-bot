@@ -27,7 +27,7 @@ class NuclearCog(commands.Cog):
 
         try:
             await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
-        except asyncio.TimeoutError:
+        except (asyncio.TimeoutError, commands.UserInputError):
             await ctx.send("You ponder for a minute... In the end you choose not to press the button. Perhaps for the best...")
         else:
             # A bit of story
@@ -62,15 +62,19 @@ class NuclearCog(commands.Cog):
                     marked_users = marked_channel.members
 
                 # Has a delay if any users are about to get kicked
-                if marked_users: await asyncio.sleep(random.random() * 5)
+                if marked_users: await asyncio.sleep(random.random() * 4)
                 # Kicks every marked user
                 for user in marked_users:
                     print(user.display_name)
-                    # await user.kick(reason="It's the end of the world!")
+                    try:
+                        # await user.kick(reason="It's the end of the world!")
+                        pass
+                    # They already left the guild
+                    except:
+                        pass
                 # Deletes the channel
                 print(marked_channel.name)
                 # await marked_channel.delete(reason="It's the end of the world!")
-            print("Done. Happy now?")
 
 def setup(bot):
     bot.add_cog(NuclearCog(bot))

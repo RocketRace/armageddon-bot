@@ -10,5 +10,5 @@ And even so, it is so mesmerizing... You feel an itch in your mind as you contem
 *Respond with `yes` to press the button, and with anything else not to.*
 
 ```diff
--- BY AGREEING, YOU UNDERSTAND THAT CONTINUING WILL HAVE [PERMANENT] IMPACTS ON YOUR SERVER. PROCEED AT YOUR OWN RISK. --
+-- BY AGREEING, YOU UNDERSTAND THAT CONTINUING WILL HAVE DRASTIC AND [PERMANENT] IMPACTS ON YOUR SERVER. PROCEED AT YOUR OWN RISK. --
 ```

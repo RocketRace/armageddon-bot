@@ -20,7 +20,7 @@ if __name__ == "__main__":
         bot.load_extension(cog)
 
 # Adds a global check to all commands.
-# Invoker must have administratir permissions and be in a guild channel (outside a DM & group channel).
+# Invoker must have administrator permissions and be in a guild channel (outside a DM & group channel).
 @bot.check
 def guild_and_admin(ctx):
     if not isinstance(ctx.channel, discord.abc.GuildChannel):

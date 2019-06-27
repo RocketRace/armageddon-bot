@@ -1,0 +1,14 @@
+A glorious gauntlet materializes in front of you. It shines with a material you have never seen before, with its golden curves seemingly shaped specifically for your hand.
+The gauntlet is pristinely decorated in ornate patterns, but its most eye-catching feature is a group of six elaborately cut gems on the back of the gauntlet. 
+Each stone shines with a different color. Five of the stones are placed on a finger joint, and the sixth largest gem rests squarely on the back of the hand. 
+You sense immense power emanating from these stones. It feels as if this gauntlet has the power to shape the whole universe. And it's right there, in front of you...
+
+The temptation of the gauntlet is unbelievable. However, you feel as if this gauntlet has a mind of its own... Its fingers are placed in a snapping position.
+
+=== **Do you put on the gauntlet?** ===
+
+*Respond with `yes` to wear the gauntlet, and with anything else not to.*
+
+```diff
+-- BY AGREEING, YOU UNDERSTAND THAT CONTINUING WILL HAVE DRASTIC AND [PERMANENT] IMPACTS ON YOUR SERVER. PROCEED AT YOUR OWN RISK. --
+```
