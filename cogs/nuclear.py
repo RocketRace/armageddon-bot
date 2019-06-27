@@ -4,10 +4,6 @@ import random
 
 from discord.ext import commands
 
-
-class UserRefused(commands.UserInputError):
-    pass
-
 # For the "nuclear fallout" armageddon option
 class NuclearCog(commands.Cog):
     def __init__(self, bot):
@@ -20,10 +16,8 @@ class NuclearCog(commands.Cog):
             if new_ctx.author.id != ctx.author.id:
                 return False
             if new_ctx.content != "yes":
-                raise UserRefused()
+                raise commands.UserInputError()
             return True
-
-            # TODO throw error if the content is anything but "yes"
 
         warning_message = "WARNING_MESSAGE"
         await ctx.send(warning_message)
@@ -65,11 +59,10 @@ class NuclearCog(commands.Cog):
                 # Kicks every marked user
                 for user in marked_users:
                     print(user.display_name)
-                    # await user.kick()
-                    pass
+                    # await user.kick(reason="It's the end of the world!")
                 # Deletes the channel
                 print(marked_channel.name)
-                # await marked_channel.delete()
+                # await marked_channel.delete(reason="It's the end of the world!")
             print("Done. Happy now?")
 
 def setup(bot):

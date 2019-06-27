@@ -1,6 +1,7 @@
 # Never share your bot token with anyone else!
 config.json
-
+# Environment specific files
 .vscode/
 .DS_STORE
-cogs/__pycache__/*
+# Automatically compiled bytecode of the cogss
+cogs/__pycache__
