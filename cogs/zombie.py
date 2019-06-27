@@ -71,13 +71,15 @@ class ZombieCog(commands.Cog):
                 # The channel is now "infected"
                 print(channel.name + " is now infected")
                 # await channel.edit(name="infected", slowmode_delay=21600)
+                await channel.send("A strange grumbling emanates from within the ground... Soil behins to shake.")
 
-                zombie_messages = ["grrrr....", "Braaaains...", "Grr..", "Raawr...", "...", "zzzzzz...", "Braainz...", "RRRrrr..."]
-
+            zombie_messages = ["grrrr....", "Braaaains...", "Grr..", "Raawr...", "...", "zzzzzz...", "Braainz...", "RRRrrr..."]
             zombie_webhooks = {}
 
+            # Sends up to 250 random zombie messages in total in the infected channels
             for i in range(random.randint(1, 250)):
                 channel = random.choice(marked_channels)
+                # Caching
                 if zombie_webhooks.get(channel.id) is None:
                     zombie_webhooks[channel.id] = await channel.webhooks()
                 zombie = random.choice(zombie_webhooks[channel.id])

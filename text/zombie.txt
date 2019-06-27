@@ -1,3 +1,7 @@
+A vial of sickly green fluid presents itself in front of you. The liquid is fully enclosed in glass, but it feels as if you can still smell it.
+
+The liquid glows in a dangerous way. You know that it will do something terrible if in contact with the world. But even then, you are curious. What *would* happen?
+
 === **Do you grab the vial?** ===
 
 *Respond with `yes` to grab it, and with anything else not to.*
