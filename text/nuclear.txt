@@ -1,0 +1,14 @@
+In front of you is a large shiny red button, encased in a perfect cube of glass.
+You are mystified by the button, and attracted to it; you feel as if pressing the button is the only thing you want in this world.
+However, there is also a short message imprinted on the glass. You clearly make out the words: `NUCLEAR STRIKE`
+
+Your heart skips a step. You realize that pressing this button could mean the end of humanity as you know it.
+And even so, it is so mesmerizing... You feel an itch in your mind as you contemplate your choices.
+
+=== **Do you press the button?** ===
+
+*Respond with `yes` to press the button, and with anything else not to.*
+
+```diff
+-- BY AGREEING, YOU UNDERSTAND THAT CONTINUING WILL HAVE [PERMANENT] IMPACTS ON YOUR SERVER. PROCEED AT YOUR OWN RISK. --
+```

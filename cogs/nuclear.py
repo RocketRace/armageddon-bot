@@ -19,20 +19,20 @@ class NuclearCog(commands.Cog):
                 raise commands.UserInputError()
             return True
 
-        warning_message = "WARNING_MESSAGE"
+        warning_message = open("text/nuclear.txt").read()
         await ctx.send(warning_message)
         try:
             await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
         except asyncio.TimeoutError:
             await ctx.send("You do not press the button. Aborting...")
         else:
-            await ctx.send("You press the button.")
-
-            await ctx.send("You hear early warning systems kick in outside.")
+            # A bit of story
+            await ctx.send("You **press the button...**")
+            await asyncio.sleep(1)
+            await ctx.send("Early warning response systems kick in outside.")
         
             # Prepares the guild for nuclear strike
             all_channels = ctx.guild.channels
-            all_users = ctx.guild.members
 
             # Absolutely nukes each channel and all users recently active in those
             random.shuffle(all_channels)
@@ -43,7 +43,7 @@ class NuclearCog(commands.Cog):
                 is_voice_channel = isinstance(marked_channel, discord.VoiceChannel)
                 if is_text_channel:
                     # Sends an early warning message
-                    await marked_channel.send("EARLY_WARNING_MESSAGE") 
+                    await marked_channel.send("@everyone **EARLY WARNING MESSAGE: NUCLEAR MISSILE HEADED THIS WAY. ALL USERS MUST EVACUATE IMMEDIATELY TO THE NEAREST BOMB SHELTER.**") 
 
                     # Chooses users to destroy along with the channel
                     message_history = marked_channel.history()
