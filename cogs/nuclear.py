@@ -26,7 +26,7 @@ class NuclearCog(commands.Cog):
         await ctx.send(warning_message)
 
         try:
-            await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
+            await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except (asyncio.TimeoutError, commands.UserInputError):
             await ctx.send("You ponder for a minute... In the end you choose not to press the button. Perhaps for the best...")
         else:

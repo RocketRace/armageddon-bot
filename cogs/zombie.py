@@ -22,7 +22,7 @@ class ZombieCog(commands.Cog):
         warning_message = "WARNING_MESSAGE"
         await ctx.send(warning_message)
         try:
-            await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
+            await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except asyncio.TimeoutError:
             await ctx.send("Aborting...")
         else:

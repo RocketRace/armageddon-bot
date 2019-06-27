@@ -32,7 +32,7 @@ def guild_and_admin(ctx):
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.UserInputError):
-        await ctx.send("You hesitate, and decide not to follow through. Perhaps for the best...")
+        await ctx.send("You hesitate, and decide not to follow through. Perhaps that's for the best...")
 
 # Begins the bot
 bot.run(config.get("token"))

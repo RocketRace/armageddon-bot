@@ -30,7 +30,7 @@ class SnapCog(commands.Cog):
         await ctx.send(warning_message)
         try:
             # Waits for a response
-            await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
+            await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except asyncio.TimeoutError:
             await ctx.send("In your hesitation, the gauntlet suddenly dematerialized. Perhaps for the better...")
         else:
