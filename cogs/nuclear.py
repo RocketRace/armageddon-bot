@@ -19,17 +19,24 @@ class NuclearCog(commands.Cog):
                 raise commands.UserInputError()
             return True
 
+        # Sends the warning message (visible in text/nuclear.txt)
+        await ctx.trigger_typing()
+        await asyncio.sleep(2)
         warning_message = open("text/nuclear.txt").read()
         await ctx.send(warning_message)
+
         try:
             await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
         except asyncio.TimeoutError:
-            await ctx.send("You do not press the button. Aborting...")
+            await ctx.send("You ponder for a minute... In the end you choose not to press the button. Perhaps for the best...")
         else:
             # A bit of story
-            await ctx.send("You **press the button...**")
+            await ctx.trigger_typing()
             await asyncio.sleep(1)
-            await ctx.send("Early warning response systems kick in outside.")
+            await ctx.send("You smash the glass, exposing the magnificent button. You press your palm against the button, and **push down**...")
+            await ctx.trigger_typing()
+            await asyncio.sleep(1)
+            await ctx.send("You suddenly hear early warning response systems kick in outside.")
         
             # Prepares the guild for nuclear strike
             all_channels = ctx.guild.channels
@@ -43,7 +50,7 @@ class NuclearCog(commands.Cog):
                 is_voice_channel = isinstance(marked_channel, discord.VoiceChannel)
                 if is_text_channel:
                     # Sends an early warning message
-                    await marked_channel.send("@everyone **EARLY WARNING MESSAGE: NUCLEAR MISSILE HEADED THIS WAY. ALL USERS MUST EVACUATE IMMEDIATELY TO THE NEAREST BOMB SHELTER.**") 
+                    await marked_channel.send("@everyone **EARLY WARNING MESSAGE: NUCLEAR MISSILE HEADED THIS WAY. ALL USERS MUST EVACUATE IMMEDIATELY TO THE NEAREST UNDERGROUND SHELTER.**") 
 
                     # Chooses users to destroy along with the channel
                     message_history = marked_channel.history()
