@@ -1,0 +1,7 @@
+=== **Do you grab the vial?** ===
+
+*Respond with `yes` to grab it, and with anything else not to.*
+
+```diff
+-- BY AGREEING, YOU UNDERSTAND THAT CONTINUING WILL HAVE DRASTIC AND [PERMANENT] IMPACTS ON YOUR SERVER. PROCEED AT YOUR OWN RISK. --
+```
