@@ -163,5 +163,7 @@ class NuclearCog(commands.Cog):
             print(ctx.guild.name + " turned into " + name)
             await ctx.guild.edit(name=name)
 
+            await ctx.send("The explosions die down... It's all over. God, it's all gone. ")
+
 def setup(bot):
     bot.add_cog(NuclearCog(bot))
