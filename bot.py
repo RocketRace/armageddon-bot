@@ -24,9 +24,11 @@ if __name__ == "__main__":
 @bot.check
 def guild_and_admin(ctx):
     if not isinstance(ctx.channel, discord.abc.GuildChannel):
-        return False
+        raise commands.NoPrivateMessage()
     if not ctx.channel.permissions_for(ctx.author).administrator:
-        return False
+        raise commands.MissingPermissions(discord.Permissions.administrator)
+    if not ctx.channel.permissions_for(ctx.me).administrator:
+        raise commands.BotMissingPermissions(discord.Permissions.administrator)
     return True
 
 @bot.event
@@ -34,6 +36,12 @@ async def on_command_error(ctx, error):
     print(error)
     if isinstance(error, commands.UserInputError):
         await ctx.send("You hesitate, and decide not to follow through. Perhaps that's for the best...")
+    elif isinstance(error, commands.NoPrivateMessage):
+        await ctx.send("Commands are guild-only. There is not much chaos I can incite in a private channel.")
+    elif isinstance(error, commands.MissingPermissions):
+        await ctx.send("Only administrators can invoke my calamity. Otherwise, the world would be a more dangerous place...")
+    elif isinstance(error, commands.BotMissingPermissions):
+        await ctx.send("I need the administrator permission for everything I do. For maximum cinematic effect, consider also putting my role at the top of the role list.")
 
 # Begins the bot
 bot.run(config.get("token"))

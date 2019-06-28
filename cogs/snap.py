@@ -102,17 +102,23 @@ class SnapCog(commands.Cog):
             marked_emoji = random.sample(all_emoji, emoji_delete_count)
 
             # Annihilates them one by one
-            for channel in marked_channels:
-                await channel.delete(reason="It's the end of the world!")
-                await asyncio.sleep(random.random() / 5)
-            for role in marked_roles:
-                await role.delete(reason="It's the end of the world!")
-                await asyncio.sleep(random.random() / 5)
+            await ctx.send("You feel faces and images in your surroundings dissipate...")
+            for emoji in marked_emoji:
+                await emoji.delete(reason="It's the end of the world!")
+            await ctx.send("You hear screams coming from somewhere outside... They're from the survivors.")
             for member in marked_members:
                 await member.kick(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
-            for emoji in marked_emoji:
-                await emoji.delete(reason="It's the end of the world!")
+            await ctx.send("Society itself seems to be dismantling...")
+            for role in marked_roles:
+                await role.delete(reason="It's the end of the world!")
+                await asyncio.sleep(random.random() / 5)
+            await ctx.send("The very ground beneath you feels unstable...")
+            await asyncio.sleep(1) # Just in case the current channel gets instantly snapped
+            for channel in marked_channels:
+                await channel.delete(reason="It's the end of the world!")
+                await asyncio.sleep(random.random() / 5)
+            
 
             # Picks webhooks to delete from the remaining channels
             remaining_channels = await ctx.guild.fetch_channels()
@@ -137,7 +143,9 @@ class SnapCog(commands.Cog):
                 for webhook in channel:
                     await webhook.delete()
             
-            await ctx.author.send("You feel the power die down. The gauntlet turns to dust in your hands. It has been done. It is over.")
+            final_message = open("text/snap3.txt")
+            await ctx.author.send(final_message.read())
+            final_message.close()
 
 def setup(bot):
     bot.add_cog(SnapCog(bot))
