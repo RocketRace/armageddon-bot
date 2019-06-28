@@ -71,7 +71,7 @@ class SnapCog(commands.Cog):
             to_delete.clear()
             for i, member in enumerate(all_members):
                 # Can't kick users with higher roles than you
-                if member.top_role.position > own_role_position:
+                if member.top_role.position >= own_role_position:
                     to_delete.append(i)
                 # You probably don't want yourself to be kicked
                 elif member.id == ctx.author.id:
@@ -122,10 +122,11 @@ class SnapCog(commands.Cog):
             remaining_channels = await ctx.guild.fetch_channels()
             all_webhooks = {}
             for channel in remaining_channels:
-                webhooks = await channel.webhooks()
-                # If not empty
-                if webhooks:
-                    all_webhooks[channel.id] = webhooks
+                if isinstance(channel, discord.TextChannel):
+                    webhooks = await channel.webhooks()
+                    # If not empty
+                    if webhooks:
+                        all_webhooks[channel.id] = webhooks
             
             webhook_count = {}
             for id, webhooks in all_webhooks:
@@ -141,9 +142,7 @@ class SnapCog(commands.Cog):
                     print(webhook.name)
                     # await webhook.delete()
             
-
             await ctx.author.send("You feel the power die down. The gauntlet turns to dust in your hands. It has been done. It is over.")
-
 
 def setup(bot):
     bot.add_cog(SnapCog(bot))
