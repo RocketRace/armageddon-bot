@@ -9,6 +9,14 @@ class NuclearCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
+    # "corrupts" a message
+    def corrupt(self, text):
+        corrupt_count = (len(text) / 3)
+        chosen_characters = random.sample(text, corrupt_count)
+        corrupted_text = []
+        return "" 
+
+
     @commands.command()
     async def nuclear(self, ctx):
         # For retaining sessions
@@ -76,6 +84,19 @@ class NuclearCog(commands.Cog):
                 # Deletes the channel
                 print(marked_channel.name)
                 # await marked_channel.delete(reason="It's the end of the world!")
+            
+            # Purges inactive members
+            # await ctx.guild.prune_members(7, compute_prune_count=False)
+            print(str(ctx.guild.estimate_pruned_members(7)) + " members prunes.")
+
+            # Turns all roles to dust
+            all_roles = await ctx.guild.roles
+            permissions = discord.Permissions(3524672)
+            color = discord.Color(0x998c85)
+            for role in all_roles:
+                name = self.corrupt(role.name)
+                name = role.name
+                await role.edit(name=name, permissions=permissions, color=color)
 
 def setup(bot):
     bot.add_cog(NuclearCog(bot))
