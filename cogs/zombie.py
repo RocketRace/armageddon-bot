@@ -66,14 +66,14 @@ class ZombieCog(commands.Cog):
                 # Edits existing ones
                 i = 0
                 for webhook in existing_webhooks:
-                    avatar = open(zombie_avatars[i % 4], "rb")
+                    avatar = open(zombie_avatars[i], "rb")
                     webhook = await webhook.edit(name="Zombie", avatar=avatar.read(), reason="It's the end of the world!")
                     zombie_webhooks.append(webhook)
                     avatar.close()
                     i += 1
                 # You can have up to 10 webhooks in a channel
                 for j in range(10 - webhook_count):
-                    avatar = open(zombie_avatars[i % 4], "rb")
+                    avatar = open(zombie_avatars[i], "rb")
                     webhook = await channel.create_webhook(name="Zombie", avatar=avatar.read(), reason="It's the end of the world!")
                     zombie_webhooks.append(webhook)
                     # always close your files
