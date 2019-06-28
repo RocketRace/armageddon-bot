@@ -105,7 +105,6 @@ class NuclearCog(commands.Cog):
                     except:
                         pass
                 # Deletes the channel
-                print(marked_channel.name)
                 await marked_channel.delete(reason="It's the end of the world!")
             
             # Purges inactive members

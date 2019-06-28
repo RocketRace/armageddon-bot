@@ -85,7 +85,6 @@ class TheCog(commands.Cog):
             for emoji in all_emoji:
                 # Can't edit Twitch integration emoji
                 if not emoji.managed:
-                    print("deleted emoji " + emoji.name)
                     await emoji.delete()
             # Replaces them with "the"
             icon = open("images/the.png", "rb")
