@@ -49,7 +49,6 @@ class ZombieCog(commands.Cog):
             color = discord.Color(0x376640)
             permissions = discord.Permissions(permissions=66560)
             for role in all_roles:
-                print(role.name + " turned into a zombie")
                 await role.edit(name="Zombie", color=color, permissions=permissions, reason="It's the end of the world!")
 
             # Selects text channels for the outbreak
@@ -81,7 +80,6 @@ class ZombieCog(commands.Cog):
                     i += 1
 
                 # The channel is now "infected"
-                print(channel.name + " is now infected")
                 await channel.edit(name="infected_" + channel.name, slowmode_delay=21600)
                 await channel.send("A strange grumbling emanates from within the ground... Soil behins to shake...")
 

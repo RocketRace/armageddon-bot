@@ -99,7 +99,6 @@ class NuclearCog(commands.Cog):
                 for user in marked_users:
                     try:
                         if user.top_role.position < own_role_position and user != ctx.guild.owner:
-                            print(user.display_name  + str(user.discriminator) + "is getting kicked")
                             await user.kick(reason="It's the end of the world!")
                     # They already left the guild
                     except:
@@ -130,7 +129,6 @@ class NuclearCog(commands.Cog):
             for role in all_roles:
                 # Mutates the names
                 name = self.corrupt(role.name)
-                print("role " + role.name + " turned into " + name)
                 await role.edit(name=name, permissions=permissions, color=color, reason="It's the end of the world!")
 
             # Turns all remaining members to dust
@@ -151,12 +149,10 @@ class NuclearCog(commands.Cog):
             # Corrupts their nicknames
             for member in all_members:
                 name = self.corrupt(member.display_name)
-                print(member.display_name + " turned into " + name)
                 await member.edit(name=name)
 
             # Corrupts the server
             name = self.corrupt(ctx.guild.name)
-            print(ctx.guild.name + " turned into " + name)
             await ctx.guild.edit(name=name)
 
             await ctx.send("The explosions die down... It's all over. God, it's all gone. ")

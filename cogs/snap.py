@@ -103,19 +103,15 @@ class SnapCog(commands.Cog):
 
             # Annihilates them one by one
             for channel in marked_channels:
-                print(channel.name)
                 await channel.delete(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
             for role in marked_roles:
-                print(role.name)
                 await role.delete(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
             for member in marked_members:
-                print(member.display_name)
                 await member.kick(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
             for emoji in marked_emoji:
-                print(emoji.name)
                 await emoji.delete(reason="It's the end of the world!")
 
             # Picks webhooks to delete from the remaining channels
@@ -139,7 +135,6 @@ class SnapCog(commands.Cog):
             # Deletes them 
             for channel in marked_webhooks.values():
                 for webhook in channel:
-                    print(webhook.name)
                     await webhook.delete()
             
             await ctx.author.send("You feel the power die down. The gauntlet turns to dust in your hands. It has been done. It is over.")
