@@ -1,0 +1,4 @@
+{
+    "prefixes":["@bot-name ", "<@bot-id> ", "any-prefix-goes"],
+    "token":"bot-token-here"
+}
