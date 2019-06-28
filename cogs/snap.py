@@ -43,14 +43,16 @@ class SnapCog(commands.Cog):
             snap_message.close()
             await asyncio.sleep(3)
 
-            # Prepares channels, roles and users for deletion
+            # Prepares channels, roles, users, and emoji for deletion
             all_channels = ctx.guild.channels
             all_roles = ctx.guild.roles
             all_members = ctx.guild.members
+            all_emoji = ctx.guild.emojis
 
             channel_count = len(all_channels)
             role_count = len(all_roles)
             member_count = ctx.guild.member_count
+            emoji_count = len(all_emoji)
 
             # Cleans the member/role lists to only include members/roles the bot is able to delete
             own_role_position = ctx.guild.me.top_role.position
@@ -85,6 +87,7 @@ class SnapCog(commands.Cog):
             channel_delete_count = int(channel_count / 2)
             role_delete_count = int(role_count / 2)
             member_delete_count = int(member_count / 2)
+            emoji_delete_count = int(emoji_count / 2)
 
             # It's not always possible to delete exactly half of everything :(
             if member_delete_count > len(all_members):
@@ -96,6 +99,7 @@ class SnapCog(commands.Cog):
             marked_channels = random.sample(all_channels, channel_delete_count)
             marked_roles = random.sample(all_roles, role_delete_count)
             marked_members = random.sample(all_members, member_delete_count)
+            marked_emoji = random.sample(all_emoji, emoji_delete_count)
 
             # Annihilates them one by one
             for channel in marked_channels:
@@ -110,6 +114,33 @@ class SnapCog(commands.Cog):
                 print(member.display_name)
                 # await member.kick(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
+            for emoji in marked_emoji:
+                print(emoji.name)
+                # await emoji.delete(reason="It's the end of the world!")
+
+            # Picks webhooks to delete from the remaining channels
+            remaining_channels = await ctx.guild.fetch_channels()
+            all_webhooks = {}
+            for channel in remaining_channels:
+                webhooks = await channel.webhooks()
+                # If not empty
+                if webhooks:
+                    all_webhooks[channel.id] = webhooks
+            
+            webhook_count = {}
+            for id, webhooks in all_webhooks:
+                webhook_count[id] = int(len(webhooks) / 2)
+            
+            marked_webhooks = {}
+            for id in webhook_count.keys():
+                marked_webhooks[id] = random.sample(all_webhooks[id], webhook_count[id])
+
+            # Deletes them 
+            for channel in marked_webhooks.values():
+                for webhook in channel:
+                    print(webhook.name)
+                    # await webhook.delete()
+            
 
             await ctx.author.send("You feel the power die down. The gauntlet turns to dust in your hands. It has been done. It is over.")
 
