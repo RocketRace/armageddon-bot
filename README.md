@@ -26,19 +26,19 @@ Run `bot.py` to launch your bot.
 
 Armageddon-bot is designed to cause cataclysm - catastrophe - carnage on any server it is used in. Armageddon-bot comes built-in with four different flavors of apocalypse, with varying degrees of destruction:
 
-`the` - Armageddon-meter: Low
+`the` - Armageddon-meter: **Low**
 
 Perhaps the strangest armageddon of them all. Turns absolutely everything and everyone in the server into "the". Channels, roles, nicknames, emoji. Even changes the guild icon!
 
-`zombie` - Armageddon-meter: Medium
+`zombie` - Armageddon-meter: **Medium**
 
 A zombie apocalypse: The icon of all apocalypses! Raises masses of zombies from the ground, which will flood text channels. Infects users, crippling their ability to perform any actions.
 
-`snap` - Armageddon-meter: High
+`snap` - Armageddon-meter: **High**
 
-"Perfectly balanced, as all things should be." Deletes half the whole server in the snap of a finger. Half of all channels, users, roles, everything. It's only right.
+"Perfectly balanced, as all things should be." Deletes half the whole server in the snap of a finger. Half of all channels, users, roles, everything. *It's only right.*
 
-`nuclear` Armageddon-meter: Very high
+`nuclear` Armageddon-meter: **Very high**
 
 Calls down swarms of nuclear missiles to bombard the server. This will destroy every channel and every member caught in the blasts. The following nuclear fallout will purge the weakest members, and slowly everything else will decay away. In the end, nothing remains. Nothing but the bitter dust of your choices.
 
