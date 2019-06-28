@@ -6,7 +6,7 @@ Armageddon-bot allows you to follow through with all your chaotic needs, with *f
 
 # DISCLAIMER
 
-**This bot will have permanent effects on your server. Use at your own discretion.**
+# This bot will have permanent effects on your server. Use at your own discretion.
 
 All commands are only accessible by users with the Administrator permission. All commands will ask you for confirmation before making any permanent changes.
 
