@@ -19,6 +19,7 @@ class TheCog(commands.Cog):
                 raise commands.UserInputError()
             return True
 
+        await ctx.trigger_typing()
         warning_message = open("text/the.txt")
         await asyncio.sleep(2)
         await ctx.send(warning_message.read())
@@ -29,6 +30,7 @@ class TheCog(commands.Cog):
             await ctx.send("In your hesitation, the word fades away... Perhaps that's for the better...")
         else:
             # Story
+            await ctx.trigger_typing()
             response_message = open("text/the2.txt")
             await asyncio.sleep(1)
             await ctx.send(response_message.read())
@@ -40,7 +42,7 @@ class TheCog(commands.Cog):
             to_delete = []
             for i, member in enumerate(all_members):
                 # Can't edit users with higher roles than you
-                if member.top_role.position > own_position:
+                if member.top_role.position > own_position or member == ctx.guild.owner:
                     to_delete.append(i)
             to_delete.reverse()
             for i in to_delete:
@@ -54,7 +56,7 @@ class TheCog(commands.Cog):
             to_delete = []
             for i, role in enumerate(all_roles):
                 # Can't edit roles with a higher position than you
-                if role.position > own_position:
+                if role.position >= own_position:
                     to_delete.append(i)
             to_delete.reverse()
             for i in to_delete:
@@ -65,31 +67,35 @@ class TheCog(commands.Cog):
 
             # Changes everybody's nickname to "the"
             for member in all_members:
-                await member.edit(nick="the")
+                await member.edit(nick="the", reason="the")
             
             # Changes every role to "the"
             for role in all_roles:
-                await role.edit(name="the")
+                await role.edit(name="the", reason="the")
 
             # Renames every channel to "the"
             for channel in all_channels:
                 # Text channels get the channel topic edited as well
                 if isinstance(channel, discord.TextChannel):
-                    await channel.edit(name="the", topic="the")
+                    await channel.edit(name="the", topic="the", reason="the")
                 else:
-                    await channel.edit(name="the")
+                    await channel.edit(name="the", reason="the")
 
-            # Renames every emoji to a variant of "the"
-            i = 0
+            # Delets every emoji 
             for emoji in all_emoji:
                 # Can't edit Twitch integration emoji
                 if not emoji.managed:
-                    await emoji.edit(name=f"the_{i}")
-                    i += 1
+                    print("deleted emoji " + emoji.name)
+                    await emoji.delete()
+            # Replaces them with "the"
+            icon = open("images/the.png", "rb")
+            for i in range(ctx.guild.emoji_limit):
+                icon.seek(0)
+                await ctx.guild.create_custom_emoji(name="the", image=icon.read(), reason="the")
 
             # Renames the guild to "the"
             # Changes the icon to "the"
-            icon = open("images/the.png", "rb")
+            icon.seek(0)
             await ctx.guild.edit(name="the", icon=icon.read())
             icon.close()
 
