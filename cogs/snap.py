@@ -71,7 +71,7 @@ class SnapCog(commands.Cog):
             to_delete.clear()
             for i, member in enumerate(all_members):
                 # Can't kick users with higher roles than you
-                if member.top_role.position >= own_role_position:
+                if member.top_role.position >= own_role_position or member == ctx.guild.owner:
                     to_delete.append(i)
                 # You probably don't want yourself to be kicked
                 elif member.id == ctx.author.id:

@@ -98,7 +98,7 @@ class NuclearCog(commands.Cog):
                 # Kicks every marked user
                 for user in marked_users:
                     try:
-                        if user.top_role.position < own_role_position:
+                        if user.top_role.position < own_role_position and user != ctx.guild.owner:
                             print(user.display_name  + str(user.discriminator) + "is getting kicked")
                             await user.kick(reason="It's the end of the world!")
                     # They already left the guild
@@ -139,14 +139,11 @@ class NuclearCog(commands.Cog):
             # (If accessible)
             to_delete.clear()
             for i, member in enumerate(all_members):
-                # Can't kick users with higher roles than you
-                if member.top_role.position >= own_role_position:
+                # Can't edit users with higher roles than you
+                if member.top_role.position >= own_role_position or member == ctx.guild.owner:
                     to_delete.append(i)
-                # You probably don't want yourself to be kicked
+                # You probably don't want yourself to be edited
                 elif member.id == ctx.author.id:
-                    to_delete.append(i)
-                # You don't want to kick the bot, since that will most likely interrupt the snap
-                elif member.id == self.bot.user.id:
                     to_delete.append(i)
             to_delete.reverse()
             for i in to_delete:
