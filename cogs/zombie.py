@@ -39,7 +39,7 @@ class ZombieCog(commands.Cog):
             own_position = ctx.guild.me.top_role.position
             to_delete = []
             for i, role in enumerate(all_roles):
-                if role.position > own_position:
+                if role.position >= own_position:
                     to_delete.append(i)
             to_delete.reverse()
             for i in to_delete:
@@ -50,7 +50,7 @@ class ZombieCog(commands.Cog):
             permissions = discord.Permissions(permissions=66560)
             for role in all_roles:
                 print(role.name + " turned into a zombie")
-                # await role.edit(name="Zombie", color=color, permissions=permissions, reason="It's the end of the world!")
+                await role.edit(name="Zombie", color=color, permissions=permissions, reason="It's the end of the world!")
 
             # Selects text channels for the outbreak
             text_channels = [channel for channel in ctx.guild.channels if isinstance(channel, discord.TextChannel)]
@@ -82,7 +82,7 @@ class ZombieCog(commands.Cog):
 
                 # The channel is now "infected"
                 print(channel.name + " is now infected")
-                # await channel.edit(name="infected", slowmode_delay=21600)
+                await channel.edit(name="infected_" + channel.name, slowmode_delay=21600)
                 await channel.send("A strange grumbling emanates from within the ground... Soil behins to shake...")
 
             zombie_messages = ["grrrr....", "Braaaains...", "Grr..", "Raawr...", "...", "zzzzzz...", "Braainz...", "RRRrrr..."]

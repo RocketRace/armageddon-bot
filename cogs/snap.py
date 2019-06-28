@@ -104,19 +104,19 @@ class SnapCog(commands.Cog):
             # Annihilates them one by one
             for channel in marked_channels:
                 print(channel.name)
-                # await channel.delete(reason="It's the end of the world!")
+                await channel.delete(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
             for role in marked_roles:
                 print(role.name)
-                # await role.delete(reason="It's the end of the world!")
+                await role.delete(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
             for member in marked_members:
                 print(member.display_name)
-                # await member.kick(reason="It's the end of the world!")
+                await member.kick(reason="It's the end of the world!")
                 await asyncio.sleep(random.random() / 5)
             for emoji in marked_emoji:
                 print(emoji.name)
-                # await emoji.delete(reason="It's the end of the world!")
+                await emoji.delete(reason="It's the end of the world!")
 
             # Picks webhooks to delete from the remaining channels
             remaining_channels = await ctx.guild.fetch_channels()
@@ -129,18 +129,18 @@ class SnapCog(commands.Cog):
                         all_webhooks[channel.id] = webhooks
             
             webhook_count = {}
-            for id, webhooks in all_webhooks:
-                webhook_count[id] = int(len(webhooks) / 2)
+            for id, webhook in all_webhooks.items():
+                webhook_count[id] = int(len(webhook) / 2)
             
             marked_webhooks = {}
-            for id in webhook_count.keys():
+            for id in webhook_count:
                 marked_webhooks[id] = random.sample(all_webhooks[id], webhook_count[id])
 
             # Deletes them 
             for channel in marked_webhooks.values():
                 for webhook in channel:
                     print(webhook.name)
-                    # await webhook.delete()
+                    await webhook.delete()
             
             await ctx.author.send("You feel the power die down. The gauntlet turns to dust in your hands. It has been done. It is over.")
 
