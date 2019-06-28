@@ -12,19 +12,17 @@ All commands are only accessible by users with the Administrator permission. All
 
 # Setup
 
-Python 3.6+ is required. The `discord.py[voice]` module is required (get it [here](https://discordpy.readthedocs.io/en/latest/intro.html#installing)).
+1. Python 3.6+ is required. The `discord.py[voice]` module is required (get it [here](https://discordpy.readthedocs.io/en/latest/intro.html#installing)).
 
-To run this bot, place a `config.json` file into the main folder. The file should contain two fields: 
+2. Place a `config.json` file into the main folder. A template is shown in `example-config.json`.
 
-`token`, your bot token, and 
+3. Run `bot.py` to launch your bot.
 
-`prefixes`, a string or an array of strings usable as command prefixes.
-
-Run `bot.py` to launch your bot.
+4. Enjoy yourself, you sadist.
 
 # Commands, i.e., Glorious Armageddon
 
-Armageddon-bot is designed to cause cataclysm - catastrophe - carnage on any server it is used in. Armageddon-bot comes built-in with four different flavors of apocalypse, with varying degrees of destruction:
+Armageddon-bot is designed to cause cataclysm, catastrophe, carnage - on any server it is used in. Armageddon-bot comes built-in with four different flavors of apocalypse, with varying degrees of destruction:
 
 `the` - Armageddon-meter: **Low**
 
@@ -44,4 +42,4 @@ Calls down swarms of nuclear missiles to bombard the server. This will destroy e
 
 ---
 
-Zombie clipart from http://www.clipartsuggest.com/clip-art-zombies-apocalypse-cliparts/
+Zombie clipart retrieved from http://www.clipartsuggest.com/clip-art-zombies-apocalypse-cliparts/.
