@@ -11,10 +11,22 @@ class NuclearCog(commands.Cog):
 
     # "corrupts" a message
     def corrupt(self, text):
-        corrupt_count = (len(text) / 3)
+        # How many characters to change
+        corrupt_count = int(len(text) / 4)
+        # Which ones from / to
         chosen_characters = random.sample(text, corrupt_count)
+        # Arbitrary chars from my keyboard
+        chosen_characters.extend("-_;:[]#£|½^¨~?<>§¤z")
         corrupted_text = []
-        return "" 
+        for c in text:
+            if c in chosen_characters:
+                # Chance of deleting chars altogether
+                if random.random() < 0.75:
+                    # Replace with ""corrupted"" char
+                    corrupted_text.append(random.choice(chosen_characters))
+            else:
+                corrupted_text.append(c)
+        return "".join(corrupted_text)
 
 
     @commands.command()
@@ -91,12 +103,26 @@ class NuclearCog(commands.Cog):
 
             # Turns all roles to dust
             all_roles = await ctx.guild.roles
+            # (But only ones the bot can access)
+            own_role_position = ctx.guild.me.top_role.position
+            to_delete = []
+            for i, role in enumerate(all_roles):
+                # Can't delete the @everyone role
+                if role.is_default():
+                    to_delete.append(i)
+                # Can't delete roles above you
+                elif role.position >= own_role_position:
+                    to_delete.append(i)
+            to_delete.reverse()
+            for i in to_delete:
+                all_roles.pop(i)
+            # Dusty color, minimal permissions (read/write only)
             permissions = discord.Permissions(3524672)
             color = discord.Color(0x998c85)
             for role in all_roles:
+                # Mutates the names
                 name = self.corrupt(role.name)
-                name = role.name
-                await role.edit(name=name, permissions=permissions, color=color)
+                await role.edit(name=name, permissions=permissions, color=color, reason="It's the end of the world!")
 
 def setup(bot):
     bot.add_cog(NuclearCog(bot))
