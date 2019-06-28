@@ -19,15 +19,21 @@ class TheCog(commands.Cog):
                 raise commands.UserInputError()
             return True
 
-        warning_message = "WARNING_MESSAGE"
-        await ctx.send(warning_message)
+        warning_message = open("text/the.txt")
+        await asyncio.sleep(2)
+        await ctx.send(warning_message.read())
+        warning_message.close()
         try:
             await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except asyncio.TimeoutError:
-            await ctx.send("Aborting...")
+            await ctx.send("In your hesitation, the word fades away... Perhaps that's for the better...")
         else:
-            await ctx.send("Here we go...")
-
+            # Story
+            response_message = open("text/the2.txt")
+            await asyncio.sleep(1)
+            await ctx.send(response_message.read())
+            response_message.close()
+            
             # Gets all members the bot has access to
             own_position = ctx.guild.me.top_role.position
             all_members = ctx.guild.members
