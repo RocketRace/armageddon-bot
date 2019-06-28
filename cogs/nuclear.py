@@ -63,6 +63,7 @@ class NuclearCog(commands.Cog):
             all_channels = ctx.guild.channels
 
             # Absolutely nukes each channel and all users recently active in those
+            own_role_position = ctx.guild.me.top_role.position
             random.shuffle(all_channels)
             for marked_channel in all_channels:
                 marked_users = []
@@ -71,12 +72,12 @@ class NuclearCog(commands.Cog):
                 is_voice_channel = isinstance(marked_channel, discord.VoiceChannel)
                 if is_text_channel:
                     # Sends an early warning message
-                    await marked_channel.send("@everyone **EARLY WARNING MESSAGE: NUCLEAR MISSILE HEADED THIS WAY. ALL USERS MUST EVACUATE IMMEDIATELY TO THE NEAREST UNDERGROUND SHELTER.**") 
+                    # await marked_channel.send("@everyone **EARLY WARNING MESSAGE: NUCLEAR MISSILE HEADED THIS WAY. ALL USERS MUST EVACUATE IMMEDIATELY TO THE NEAREST UNDERGROUND SHELTER.**") 
 
                     # Chooses users to destroy along with the channel
                     message_history = marked_channel.history()
                     async for message in message_history:
-                        if message.author not in marked_users:
+                        if message.author not in marked_users and message.author.discriminator != "0000":
                             marked_users.append(message.author)
                 elif is_voice_channel:
                     # TODO: Sends a voice clip of a warning message
@@ -86,25 +87,24 @@ class NuclearCog(commands.Cog):
                 if marked_users: await asyncio.sleep(random.random() * 4)
                 # Kicks every marked user
                 for user in marked_users:
-                    print(user.display_name)
-                    try:
-                        # await user.kick(reason="It's the end of the world!")
-                        pass
-                    # They already left the guild
-                    except:
-                        pass
+                    if user.top_role.position < own_role_position:
+                        print(user.display_name  + str(user.discriminator) + "is getting kicked")
+                        try:
+                            # await user.kick(reason="It's the end of the world!")
+                            pass
+                        # They already left the guild
+                        except:
+                            pass
                 # Deletes the channel
                 print(marked_channel.name)
                 # await marked_channel.delete(reason="It's the end of the world!")
             
             # Purges inactive members
             # await ctx.guild.prune_members(7, compute_prune_count=False)
-            print(str(ctx.guild.estimate_pruned_members(7)) + " members prunes.")
 
             # Turns all roles to dust
-            all_roles = await ctx.guild.roles
+            all_roles = ctx.guild.roles
             # (But only ones the bot can access)
-            own_role_position = ctx.guild.me.top_role.position
             to_delete = []
             for i, role in enumerate(all_roles):
                 # Can't delete the @everyone role
@@ -122,7 +122,37 @@ class NuclearCog(commands.Cog):
             for role in all_roles:
                 # Mutates the names
                 name = self.corrupt(role.name)
-                await role.edit(name=name, permissions=permissions, color=color, reason="It's the end of the world!")
+                print("role " + role.name + " turned into " + name)
+                # await role.edit(name=name, permissions=permissions, color=color, reason="It's the end of the world!")
+
+            # Turns all remaining members to dust
+            all_members = ctx.guild.members
+            # (If accessible)
+            to_delete.clear()
+            for i, member in enumerate(all_members):
+                # Can't kick users with higher roles than you
+                if member.top_role.position > own_role_position:
+                    to_delete.append(i)
+                # You probably don't want yourself to be kicked
+                elif member.id == ctx.author.id:
+                    to_delete.append(i)
+                # You don't want to kick the bot, since that will most likely interrupt the snap
+                elif member.id == self.bot.user.id:
+                    to_delete.append(i)
+            to_delete.reverse()
+            for i in to_delete:
+                all_members.pop(i)
+
+            # Corrupts their nicknames
+            for member in all_members:
+                name = self.corrupt(member.display_name)
+                print(member.display_name + " turned into " + name)
+                await member.edit(name=name)
+
+            # Corrupts the server
+            name = self.corrupt(ctx.guild.name)
+            print(ctx.guild.name + " turned into " + name)
+            # await ctx.guild.edit(name=name)
 
 def setup(bot):
     bot.add_cog(NuclearCog(bot))
