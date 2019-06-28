@@ -4,7 +4,7 @@ import random
 
 from discord.ext import commands
 
-# For the "nuclear fallout" armageddon option
+# For the "the" armageddon option
 class TheCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -22,7 +22,7 @@ class TheCog(commands.Cog):
         warning_message = "WARNING_MESSAGE"
         await ctx.send(warning_message)
         try:
-            await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
+            await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except asyncio.TimeoutError:
             await ctx.send("Aborting...")
         else:
@@ -83,7 +83,9 @@ class TheCog(commands.Cog):
 
             # Renames the guild to "the"
             # Changes the icon to "the"
-            await ctx.guild.edit(name="the", icon=open("the.png", "rb"))
+            icon = open("images/the.png", "rb")
+            await ctx.guild.edit(name="the", icon=icon.read())
+            icon.close()
 
 
 

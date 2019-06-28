@@ -22,11 +22,12 @@ class NuclearCog(commands.Cog):
         # Sends the warning message (visible in text/nuclear.txt)
         await ctx.trigger_typing()
         await asyncio.sleep(2)
-        warning_message = open("text/nuclear.txt").read()
-        await ctx.send(warning_message)
+        warning_message = open("text/nuclear.txt")
+        await ctx.send(warning_message.read())
+        warning_message.close()
 
         try:
-            await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
+            await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except (asyncio.TimeoutError, commands.UserInputError):
             await ctx.send("You ponder for a minute... In the end you choose not to press the button. Perhaps for the best...")
         else:

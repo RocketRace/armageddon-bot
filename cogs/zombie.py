@@ -4,7 +4,7 @@ import random
 
 from discord.ext import commands
 
-# For the "nuclear fallout" armageddon option
+# For the "zombie apocalypse" armageddon option
 class ZombieCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -19,14 +19,18 @@ class ZombieCog(commands.Cog):
                 raise commands.UserInputError()
             return True
 
-        warning_message = "WARNING_MESSAGE"
-        await ctx.send(warning_message)
+        warning_message = open("text/zombie.txt")
+        await ctx.send(warning_message.read())
+        warning_message.close()
         try:
-            await self.bot.wait_for("message", timeout=30.0, check=user_accepted)
+            await self.bot.wait_for("message", timeout=45.0, check=user_accepted)
         except asyncio.TimeoutError:
             await ctx.send("Aborting...")
         else:
-            await ctx.send("Here we go...")
+            # Story
+            response_message = open("text/zombie2.txt")
+            await ctx.send(response_message.read())
+            response_message.close()
 
             # Prepares roles for mass updates
             all_roles = ctx.guild.roles
@@ -54,30 +58,38 @@ class ZombieCog(commands.Cog):
 
             # Starts a "zombie outbreak"
             for channel in marked_channels:
-                # await channel.send(OUTBREAK_MESSAGE)
-
                 # Gets rid of existing webhooks and makes new "zombie" ones
                 existing_webhooks = await channel.webhooks()
-                for webhook in existing_webhooks:
-                    await webhook.delete()
-                # You can have up to 10 webhooks in a channel
+                webhook_count = len(existing_webhooks)
                 zombie_webhooks = []
-                zombie_avatars = [None, None, None, None, None, None, None, None, None, None] # TODO
-                for i in range(10):
-                    avatar = zombie_avatars[i]
-                    webhook = await channel.create_webhook(name="Zombie", avatar=None, reason="It's the end of the world!")
+                zombie_avatars = ["images/zombie" + str(i) + ".png" for i in range(10)]
+                # Edits existing ones
+                i = 0
+                for webhook in existing_webhooks:
+                    avatar = open(zombie_avatars[i % 4], "rb")
+                    webhook = await webhook.edit(name="Zombie", avatar=avatar.read(), reason="It's the end of the world!")
                     zombie_webhooks.append(webhook)
+                    avatar.close()
+                    i += 1
+                # You can have up to 10 webhooks in a channel
+                for j in range(10 - webhook_count):
+                    avatar = open(zombie_avatars[i % 4], "rb")
+                    webhook = await channel.create_webhook(name="Zombie", avatar=avatar.read(), reason="It's the end of the world!")
+                    zombie_webhooks.append(webhook)
+                    # always close your files
+                    avatar.close()
+                    i += 1
 
                 # The channel is now "infected"
                 print(channel.name + " is now infected")
                 # await channel.edit(name="infected", slowmode_delay=21600)
-                await channel.send("A strange grumbling emanates from within the ground... Soil behins to shake.")
+                await channel.send("A strange grumbling emanates from within the ground... Soil behins to shake...")
 
             zombie_messages = ["grrrr....", "Braaaains...", "Grr..", "Raawr...", "...", "zzzzzz...", "Braainz...", "RRRrrr..."]
             zombie_webhooks = {}
 
-            # Sends up to 250 random zombie messages in total in the infected channels
-            for i in range(random.randint(1, 250)):
+            # Sends up to (10 * channelcount) random zombie messages in total in the infected channels
+            for i in range(random.randint(1, 10) * len(marked_channels)):
                 channel = random.choice(marked_channels)
                 # Caching
                 if zombie_webhooks.get(channel.id) is None:
