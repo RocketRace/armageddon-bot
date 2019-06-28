@@ -12,7 +12,7 @@ class NuclearCog(commands.Cog):
     # "corrupts" a message
     def corrupt(self, text):
         # How many characters to change
-        corrupt_count = int(len(text) / 4)
+        corrupt_count = int(len(text) / 4) + 1
         # Which ones from / to
         chosen_characters = random.sample(text, corrupt_count)
         # Arbitrary chars from my keyboard
