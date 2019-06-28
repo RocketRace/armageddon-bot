@@ -99,11 +99,5 @@ class ZombieCog(commands.Cog):
                 await zombie.send(message)
                 await asyncio.sleep(0.1)
 
-
-
-
-            
-
-
 def setup(bot):
     bot.add_cog(ZombieCog(bot))
