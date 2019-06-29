@@ -26,9 +26,9 @@ def guild_and_admin(ctx):
     if not isinstance(ctx.channel, discord.abc.GuildChannel):
         raise commands.NoPrivateMessage()
     if not ctx.channel.permissions_for(ctx.author).administrator:
-        raise commands.MissingPermissions(discord.Permissions.administrator)
+        raise commands.MissingPermissions(["administrator"])
     if not ctx.channel.permissions_for(ctx.me).administrator:
-        raise commands.BotMissingPermissions(discord.Permissions.administrator)
+        raise commands.BotMissingPermissions(["administrator"])
     return True
 
 @bot.event

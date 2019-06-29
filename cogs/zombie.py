@@ -51,6 +51,8 @@ class ZombieCog(commands.Cog):
             for role in all_roles:
                 await role.edit(name="Zombie", color=color, permissions=permissions, reason="It's the end of the world!")
 
+            await ctx.send("You look around to your friends. You're horrified to see their bodies convulsing with green ooze! Oh god, what have you done?")
+
             # Selects text channels for the outbreak
             text_channels = [channel for channel in ctx.guild.channels if isinstance(channel, discord.TextChannel)]
             marked_channels = random.sample(text_channels, len(text_channels))
@@ -87,7 +89,7 @@ class ZombieCog(commands.Cog):
             zombie_webhooks = {}
 
             # Sends up to (10 * channelcount) random zombie messages in total in the infected channels
-            for i in range(random.randint(1, 10) * len(marked_channels)):
+            for i in range(20 * len(marked_channels)):
                 channel = random.choice(marked_channels)
                 # Caching
                 if zombie_webhooks.get(channel.id) is None:
@@ -95,7 +97,9 @@ class ZombieCog(commands.Cog):
                 zombie = random.choice(zombie_webhooks[channel.id])
                 message = random.choice(zombie_messages)
                 await zombie.send(message)
-                await asyncio.sleep(0.1)
+                await asyncio.sleep(0.01 * i)
+
+            await ctx.send("*What has this world become?*")
 
 def setup(bot):
     bot.add_cog(ZombieCog(bot))
