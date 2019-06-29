@@ -17,7 +17,7 @@ This project was designed and built as part of [Discord Community Hack Week 2019
 
 # Setup
 
-1. Python 3.6+ is required. The `discord.py[voice]` module is required (get it [here](https://discordpy.readthedocs.io/en/latest/intro.html#installing)).
+1. Python 3.6+ is required. The `discord.py[voice]` module v1.2 is required (get it [here](https://discordpy.readthedocs.io/en/latest/intro.html#installing)).
 
 2. Place a `config.json` file into the main folder. A template is shown in `example-config.json`.
 
